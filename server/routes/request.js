@@ -1,6 +1,6 @@
 import express from 'express'
 
-import {getPosts, getPost, createPost,updatePost,likePost,deletePost} from '../controllers/'
+import {getPosts, getPost, createPost,updatePost,likePost,deletePost} from '../controllers/controllers.js'
 const router = express.router()
 
 router.get('/',getPosts)
