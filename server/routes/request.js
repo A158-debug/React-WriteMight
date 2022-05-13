@@ -1,7 +1,7 @@
 import express from 'express'
 
 import {getPosts, getPost, createPost,updatePost,likePost,deletePost} from '../controllers/controllers.js'
-const router = express.router()
+const router = express.Router()
 
 router.get('/',getPosts)
 router.post('/',createPost)
