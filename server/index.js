@@ -16,7 +16,7 @@ const CONNECTION_URL ='mongodb+srv://A158-debug:L4lamborghini@cluster0.zaeyu.mon
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(CONNECTION_URL)
-.then(()=> app.listen(PORT, ()=>console.log('server running on port : http://localhost:${PORT}')))
+.then(()=> app.listen(PORT, ()=>console.log(`server running on port : http://localhost:${PORT}`)))
 .catch((error)=>console.log(error.message));
 
 // mongoose.set('useFindAndModify',false);
