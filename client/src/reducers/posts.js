@@ -1,48 +1,26 @@
+
 import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
-import * as api from '../api/index';
 
-export const getPosts = () => async(dispatch)=>{
-    try {
-            const {data} = await api.fetchPosts();
-            dispatch({type:FETCH_ALL, payload:data});
-    } catch (error) {
-        console.log(error.message);
-    } 
-}
+//Take two paramter state and action
+const memoriesRequest = (posts = [], action) => {
+    switch (action.type) {
+        case FETCH_ALL:
+            return action.payload;
 
-export const createPost = (post) => async(dispatch)=>{
-    try{
-        const {data} = await api.createPost(post);
-        dispatch({type:CREATE, payload:data});
-    }
-    catch(error){
-        console.log(error.message);
+        case LIKE:
+            return posts.map((posts) => (posts._id === action.payload._id ? action.payload : posts));  //again go to video
+
+        case CREATE:
+            return [...posts, action.payload];
+
+        case UPDATE:
+            return posts.map((posts) => (posts._id === action.payload._id ? action.payload : posts));  //again go to video
+
+        case DELETE:
+            return posts.filter((posts) => posts._id !== action.payload);
+            
+        default:
+            return posts;
     }
 };
-
-export const updatePost = (id,post) => async(dispatch)=>{
-    try{
-        const {data} = await api.updatePost(id,post);
-        dispatch({type:UPDATE,payload:data});
-    }catch (error) {
-        console.log(error.message);
-    }
-}
-
-export const likePost =(id)=>async(dispatch)=>{
-    try{
-        const {data} = await api.likePost(id);
-        dispatch({type:LIKE,payload:data});
-    }catch (error){
-        console.log(error.message);
-    }
-}
-
-export const deletePost = (id)=> async(dispatch)=>{
-    try{
-        await api.deletePost(id);
-        dispatch({type:DELETE,payload:id});
-    }catch (error) {
-        console.log(error.message);
-    }
-}
+export default memoriesRequest;
