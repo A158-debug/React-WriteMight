@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useStyles from "./style";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
-import FileBase from "redux-file-base64";
+import FileBase from "react-file-base64";
 
 import { createPost, upDatePost } from "../../action/index";
 import { useDispatch, useSelector } from "react-redux";

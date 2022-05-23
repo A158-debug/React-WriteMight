@@ -13,7 +13,7 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
 import moment from "moment";
 import { useDispatch } from "react-redux";
-import { likePost, deletePost } from "../../../actions/index";
+import { likePost, deletePost } from "../../../action/index";
 import useStyles from "./style";
 
 const Post = ({ post, setCurrentId }) => {

@@ -9,7 +9,7 @@ const Posts = ({ currentId }) => {
   const posts = useSelector((state) => state.posts);
   const classes = useStyles();
 
-  return (!posts.lemgth() ? (
+  return (!posts.length ? (
     <CircularProgress />
   ) : (
     <Grid
