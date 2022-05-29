@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import useStyles from "./style";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64";
-
 import { createPost, upDatePost } from "../../action/index";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -22,6 +21,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const classes = useStyles();
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
     if (post) setPostData(post);
@@ -47,11 +47,23 @@ const Form = ({ currentId, setCurrentId }) => {
       clear();
     }
   };
+
+  if(!user?.result?.name){
+    return(
+      <>
+      <Paper className={classes.paper}>
+        <Typography variant="h6" align="center">
+          Please Login to create a post
+          </Typography>
+          </Paper>
+      </>
+    )
+  }
   return (
     <>
-      <Paper className={classes.papaer}>
-        <form onSubmit={handleSubmit} autoComplete="off" noValidate>
-          <Typography variant="h6"></Typography>
+      <Paper className={classes.paper}>
+        <form onSubmit={handleSubmit} autoComplete="off" noValidate className={`${classes.root} ${classes.form}`}>
+          <Typography variant="h6">{currentId ? `Editing "${post.title}"` : 'Creating a Memory'}</Typography>
           <TextField
             name="creator"
             variant="outlined"
@@ -68,7 +80,7 @@ const Form = ({ currentId, setCurrentId }) => {
             variant="outlined"
             label="Title"
             fullWidth
-            value={postData.creator}
+            value={postData.title}
             onChange={(e) =>
               setPostData({ ...postData, title: e.target.value })
             }
@@ -79,7 +91,7 @@ const Form = ({ currentId, setCurrentId }) => {
             variant="outlined"
             label="Message"
             fullWidth
-            value={postData.creator}
+            value={postData.message}
             onChange={(e) =>
               setPostData({ ...postData, message: e.target.value })
             }
@@ -90,7 +102,7 @@ const Form = ({ currentId, setCurrentId }) => {
             variant="outlined"
             label="Tags"
             fullWidth
-            value={postData.creator}
+            value={postData.tags}
             onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
           />
           <div className={classes.fileInput}>
