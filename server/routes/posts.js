@@ -14,6 +14,6 @@ router.post('/',auth,createPost)
 router.patch('/:id',auth,updatePost)
 router.delete('/:id',auth,deletePost)
 router.patch('/:id/likePost', likePost)
-// router.post('/:id/commentPost',commentPost)
+router.post('/:id/commentPost',commentPost)
 
 export default router
