@@ -37,7 +37,7 @@ export const getPostsByCreator = (name) => async (dispatch) => {
     }
 };
 
-export const getPostBySearch = (searchQuery) => async (dispatch) => {
+export const getPostsBySearch = (searchQuery) => async (dispatch) => {
     try {
         dispatch({ type: START_LOADING });
         const { data } = await api.fetchPostsBySearch(searchQuery);
