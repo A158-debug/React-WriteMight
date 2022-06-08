@@ -6,13 +6,14 @@ import { GoogleLogin } from 'react-google-login';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Icon from './icon';
 import { signin, signup } from '../../actions/auth';
-import { AUTH } from '../../constants/actionTypes';
+import { LOGIN } from '../../constants/actionTypes';
 import useStyles from './style';
 import Input from './Input';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
 const SignUp = () => {
+  
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignUp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -44,7 +45,7 @@ const SignUp = () => {
     const token = res?.tokenId;
 
     try {
-      dispatch({ type: AUTH, data: { result, token } });
+      dispatch({ type: LOGIN, data: { result, token } });
       history.push('/');
     } catch (error) {
       console.log(error);

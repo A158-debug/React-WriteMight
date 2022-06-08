@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
-import useStyles from "./style";
-import { TextField, Button, Typography, Paper } from "@material-ui/core";
-import FileBase from "react-file-base64";
-import { createPost, upDatePost } from "../../action/index";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { TextField, Button, Typography, Paper } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import FileBase from 'react-file-base64';
+import { useHistory } from 'react-router-dom';
+import ChipInput from 'material-ui-chip-input';
+
+import { createPost, updatePost } from '../../actions/posts';
+import useStyles from './styles';
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
@@ -22,10 +25,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
-
-  useEffect(() => {
-    if (post) setPostData(post);
-  }, [post]);
+  const history = useHistory();
 
   const clear = () => {
     setCurrentId(0);
@@ -38,33 +38,48 @@ const Form = ({ currentId, setCurrentId }) => {
     });
   };
 
+  useEffect(() => {
+    if (!post?.title) clear()
+    if (post) setPostData(post);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [post]);
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (currentId === 0) {
-      dispatch(createPost(postData));
+      dispatch(createPost({ ...postData, name: user?.result?.name }, history));
     } else {
-      dispatch(upDatePost(currentId, postData));
+      dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
       clear();
     }
   };
 
-  if(!user?.result?.name){
-    return(
+  if (!user?.result?.name) {
+    return (
       <>
-      <Paper className={classes.paper}>
-        <Typography variant="h6" align="center">
-          Please Login to create a post
+        <Paper className={classes.paper}>
+          <Typography variant="h6" align="center">
+            Please Login to create a post
           </Typography>
-          </Paper>
+        </Paper>
       </>
     )
   }
+  const handleAddChip = (tag) => {
+    setPostData({ ...postData, tags: [...postData.tags, tag] });
+  };
+
+  const handleDeleteChip = (chipToDelete) => {
+    setPostData({ ...postData, tags: postData.tags.filter((tag) => tag !== chipToDelete) });
+  };
   return (
     <>
       <Paper className={classes.paper}>
         <form onSubmit={handleSubmit} autoComplete="off" noValidate className={`${classes.root} ${classes.form}`}>
           <Typography variant="h6">{currentId ? `Editing "${post.title}"` : 'Creating a Memory'}</Typography>
-          <TextField
+          {/* <TextField
             name="creator"
             variant="outlined"
             label="Creator"
@@ -73,7 +88,7 @@ const Form = ({ currentId, setCurrentId }) => {
             onChange={(e) =>
               setPostData({ ...postData, creator: e.target.value })
             }
-          />
+          /> */}
 
           <TextField
             name="title"
@@ -96,15 +111,18 @@ const Form = ({ currentId, setCurrentId }) => {
               setPostData({ ...postData, message: e.target.value })
             }
           />
-
-          <TextField
-            name="tags"
-            variant="outlined"
-            label="Tags"
-            fullWidth
-            value={postData.tags}
-            onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
-          />
+          <div style={{ padding: '5px 0', width: '94%' }}
+          >
+            <ChipInput
+              name="tags"
+              variant="outlined"
+              label="Tags"
+              fullWidth
+              value={postData.tags}
+              onAdd={(chip) => handleAddChip(chip)}
+              onDelete={(chip) => handleDeleteChip(chip)}
+            />
+          </div>
           <div className={classes.fileInput}>
             <FileBase
               type="file"
