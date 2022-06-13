@@ -4,23 +4,31 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
-import { useDispatch } from 'react-redux';
+
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { likePost, deletePost } from '../../../actions/posts';
 import useStyles from './style';
+import { likePost, deletePost ,getPost} from '../../../actions/posts';
 
 const Post = ({ post, setCurrentId }) => {
+  //It give user profile credentials and token
   const user = JSON.parse(localStorage.getItem('profile'));
+
+  // console.log(user); //Object
+  // console.log(post); //Object
+
   const [likes, setLikes] = useState(post?.likes);
   const dispatch = useDispatch();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const classes = useStyles();
-
+ 
+  // userId either will take google id or profile id
   const userId = user?.result.googleId || user?.result?._id;
-  const hasLikedPost = post.likes.find((like) => like === userId);
 
+  const hasLikedPost = post.likes.find((like) => like === userId);  //likes is an array inside Post
+  console.log("hasLikedPost ",hasLikedPost);
   const handleLike = async () => {
     dispatch(likePost(post._id));
 
@@ -45,9 +53,8 @@ const Post = ({ post, setCurrentId }) => {
   };
 
   const openPost = (e) => {
-    // dispatch(getPost(post._id, history));
-
-    history.push(`/posts/${post._id}`);
+    dispatch(getPost(post._id, navigate));
+    navigate(`/posts/${post._id}`);
   };
 
   return (
@@ -58,7 +65,7 @@ const Post = ({ post, setCurrentId }) => {
         className={classes.cardAction}
         onClick={openPost}
       >
-        <CardMedia className={classes.media} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} />
+        <CardMedia className={classes.media} image={post.selectedFile || 'https://images.unsplash.com/photo-1588741145164-494800cdeda4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1933&q=80'} title={post.title} />
         <div className={classes.overlay}>
           <Typography variant="h6">{post.name}</Typography>
           <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>

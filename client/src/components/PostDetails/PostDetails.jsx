@@ -9,7 +9,7 @@ import CommentSection from './CommentSection';
 import useStyles from './styles';
 
 const Post = () => {
-  const { post, posts, isLoading } = useSelector((state) => state.posts);
+  const { post, posts, isLoading } = useSelector((state) => state.postsReducer);
   const dispatch = useDispatch();
   const history = useNavigate();
   const classes = useStyles();

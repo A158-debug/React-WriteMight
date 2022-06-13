@@ -9,7 +9,7 @@ import { getPostsByCreator, getPostsBySearch } from "../../actions/posts";
 const CreateOrTag = () => {
   const { name } = useParams();
   const dispatch = useDispatch();
-  const { posts, isLoading } = useSelector((state) => state.posts);
+  const { posts, isLoading } = useSelector((state) => state.postsReducer);
   const location = useLocation();
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const CreateOrTag = () => {
     }
   }, [dispatch, location.pathname, name]);
 
-  if (!posts.length && !isLoading) return "NO POSTS";
+  if (!Object.keys(posts).length && !isLoading) return "NO POSTS";
 
   return (
     <>

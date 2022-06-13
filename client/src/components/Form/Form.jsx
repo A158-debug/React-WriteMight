@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64';
-import { useNavigate } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
-
-import { createPost, updatePost } from '../../actions/posts';
 import useStyles from './style';
 
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { createPost, updatePost } from '../../actions/posts';
+
 const Form = ({ currentId, setCurrentId }) => {
+
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [postData, setPostData] = useState({
     creator: "",
     title: "",
@@ -17,15 +22,13 @@ const Form = ({ currentId, setCurrentId }) => {
     selectedFile: "",
   });
 
-  //again see video for this line
+  const user = JSON.parse(localStorage.getItem("profile")); //user credentials
+  // console.log(user);
   const post = useSelector((state) =>
-    currentId ? state.posts.find((message) => message._id === currentId) : null
-  );
+    currentId ? state.postsReducer.posts.data.map((e) => e._id === currentId) : null);
 
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem("profile"));
-  const history = useNavigate();
+  // const post1 = useSelector((state) => state.postsReducer.posts.data.map((e) => e._id === currentId));
+   console.log("post ",post);
 
   const clear = () => {
     setCurrentId(0);
@@ -49,13 +52,16 @@ const Form = ({ currentId, setCurrentId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (currentId === 0) {
-      dispatch(createPost({ ...postData, name: user?.result?.name }, history));
+      //create a new post and navigate to hoem page
+      dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
     } else {
+      //update a post 
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
       clear();
     }
   };
 
+  //if user doesn't have an account
   if (!user?.result?.name) {
     return (
       <>
@@ -67,6 +73,7 @@ const Form = ({ currentId, setCurrentId }) => {
       </>
     )
   }
+
   const handleAddChip = (tag) => {
     setPostData({ ...postData, tags: [...postData.tags, tag] });
   };
@@ -79,16 +86,6 @@ const Form = ({ currentId, setCurrentId }) => {
       <Paper className={classes.paper}>
         <form onSubmit={handleSubmit} autoComplete="off" noValidate className={`${classes.root} ${classes.form}`}>
           <Typography variant="h6">{currentId ? `Editing "${post.title}"` : 'Creating a Memory'}</Typography>
-          {/* <TextField
-            name="creator"
-            variant="outlined"
-            label="Creator"
-            fullWidth
-            value={postData.creator}
-            onChange={(e) =>
-              setPostData({ ...postData, creator: e.target.value })
-            }
-          /> */}
 
           <TextField
             name="title"

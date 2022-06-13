@@ -8,8 +8,15 @@ import { useSelector } from 'react-redux';
 const Posts = ({ setCurrentId }) => {
   // from store-> postReducer it take posts and isLoading
   const { posts, isLoading } = useSelector((state) => state.postsReducer || {});
+
+  const postReducer =   useSelector((state) => state.postsReducer || {});
+  console.log("postReducer ",postReducer)
+
+  //Posts is a object which contain all the array of memeries and 
+  // currentPage and number of Pages
+
   const classes = useStyles();
-  console.log(posts);
+ 
   //if there is no posts then it retur No posts
   if (!Object.keys(posts).length && !isLoading) return 'No posts';
 
