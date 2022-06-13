@@ -5,7 +5,7 @@ import FileBase from 'react-file-base64';
 import { useNavigate } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 
-import { createPost, upDatePost } from '../../actions/posts';
+import { createPost, updatePost } from '../../actions/posts';
 import useStyles from './style';
 
 const Form = ({ currentId, setCurrentId }) => {
@@ -51,7 +51,7 @@ const Form = ({ currentId, setCurrentId }) => {
     if (currentId === 0) {
       dispatch(createPost({ ...postData, name: user?.result?.name }, history));
     } else {
-      dispatch(upDatePost(currentId, { ...postData, name: user?.result?.name }));
+      dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
       clear();
     }
   };
