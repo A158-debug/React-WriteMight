@@ -4,14 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import {createStore,applyMiddleware,compose} from 'redux';
+import authReducer from './reducers/auth';
+import postsReducer from './reducers/posts';
+
+import { configureStore } from '@reduxjs/toolkit'
 import {Provider} from 'react-redux';
-import thunk from 'redux-thunk';
 
-import { reducers} from './reducers';
-
-const store = createStore(reducers,compose(applyMiddleware(thunk)));
-
+const store = configureStore({
+  reducer: {
+    authReducer: authReducer,
+    postsReducer: postsReducer
+  }
+})
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
