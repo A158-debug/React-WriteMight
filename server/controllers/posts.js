@@ -90,10 +90,14 @@ export const deletePost = async(req, res)=>{
 }
 
 export const likePost = async(req, res)=>{
+
     const {id} = req.params;
+    console.log("id ",id)
+    console.log("req ",req)
+    console.log(req.userId)
 
     if(!req.userId){
-        return res.status(401).send('you must be logged in to like a post')
+        return res.status(401).send({ message: "Unauthenticated" })
     }
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`no post with id {id}`);
 

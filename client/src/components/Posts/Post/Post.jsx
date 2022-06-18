@@ -28,7 +28,7 @@ const Post = ({ post, setCurrentId }) => {
   const userId = user?.result.googleId || user?.result?._id;
 
   const hasLikedPost = post.likes.find((like) => like === userId);  //likes is an array inside Post
-  console.log("hasLikedPost ",hasLikedPost);
+  // console.log("hasLikedPost ",hasLikedPost);
   const handleLike = async () => {
     dispatch(likePost(post._id));
 

@@ -18,7 +18,7 @@ const Navbar = () => {
 
   const logout = () => {
     dispatch({ type: actionType.LOGOUT });
-    navigate("/LOGIN");
+    navigate("/auth");
     setUser(null);
   };
 
@@ -50,6 +50,7 @@ const Navbar = () => {
           height="40px"
         />
       </Link>
+
       <Toolbar className={classes.toolbar}>
         {user?.result ? (
           <div className={classes.profile}>
@@ -63,6 +64,7 @@ const Navbar = () => {
             <Typography className={classes.userName} variant="h6">
               {user?.result.name}
             </Typography>
+            
             <Button
               variant="contained"
               className={classes.logout}

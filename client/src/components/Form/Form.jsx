@@ -28,7 +28,7 @@ const Form = ({ currentId, setCurrentId }) => {
     currentId ? state.postsReducer.posts.data.map((e) => e._id === currentId) : null);
 
   // const post1 = useSelector((state) => state.postsReducer.posts.data.map((e) => e._id === currentId));
-   console.log("post ",post);
+  //  console.log("post ",post);
 
   const clear = () => {
     setCurrentId(0);

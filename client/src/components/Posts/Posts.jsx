@@ -9,8 +9,8 @@ const Posts = ({ setCurrentId }) => {
   // from store-> postReducer it take posts and isLoading
   const { posts, isLoading } = useSelector((state) => state.postsReducer || {});
 
-  const postReducer =   useSelector((state) => state.postsReducer || {});
-  console.log("postReducer ",postReducer)
+  // const postReducer =   useSelector((state) => state.postsReducer || {});
+  // console.log("postReducer ",postReducer)
 
   //Posts is a object which contain all the array of memeries and 
   // currentPage and number of Pages
