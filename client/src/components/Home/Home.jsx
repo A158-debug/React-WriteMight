@@ -45,7 +45,9 @@ const Home = () => {
     }
   };
 
-  const handleAddChip = (tag) => setTags([...tags, tag]);
+  const handleAddChip = (tag) => {
+    console.log("tags",tag)
+    setTags([...tags, tag])};
 
   const handleDeleteChip = (chipToDelete) => setTags(tags.filter((tag) => tag !== chipToDelete));
 
@@ -70,6 +72,7 @@ const Home = () => {
               <Button onClick={searchPost} className={classes.searchButton} variant="contained" color="primary">Search</Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
+
             {(!searchQuery && !tags.length) && (
               <Paper className={classes.pagination} elevation={6}>
                 <Paginate page={page} />

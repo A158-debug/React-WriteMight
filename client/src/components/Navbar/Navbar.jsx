@@ -75,6 +75,7 @@ const Navbar = () => {
             </Button>
           </div>
         ) : (
+          <Link to="/auth">
           <Button
             component={Link}
             to="/auth"
@@ -83,6 +84,7 @@ const Navbar = () => {
           >
             Sign In
           </Button>
+          </Link>
         )}
       </Toolbar>
     </AppBar>

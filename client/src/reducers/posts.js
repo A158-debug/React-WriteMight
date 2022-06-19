@@ -1,6 +1,8 @@
 import { FETCH_ALL, FETCH_BY_SEARCH, FETCH_BY_CREATOR, FETCH_POST, CREATE, UPDATE, DELETE, LIKE, COMMENT,END_LOADING,START_LOADING } from '../constants/actionTypes';
 
 const postsReducer = (state = { isLoading: true, posts: [] }, action) => {
+    // console.log("state ",state);
+    // console.log("action ",action);
     switch (action.type) {
         case START_LOADING:
             return { ...state, isLoading: true };
@@ -12,8 +14,8 @@ const postsReducer = (state = { isLoading: true, posts: [] }, action) => {
             return {
                 ...state,
                 posts: action.payload.data,
-                currentPage: action.payload.currentPage,
-                numberOfPages: action.payload.numberOfPages,
+                currentPage: action.payload.data.currentPage,
+                numberOfPages: action.payload.data.numberOfPages,
             };
 
         case FETCH_BY_SEARCH:
@@ -24,11 +26,11 @@ const postsReducer = (state = { isLoading: true, posts: [] }, action) => {
             return { ...state, post: action.payload.post };
 
         case LIKE:
-            return { ...state, posts: state.posts.map((post) => (post._id === action.payload._id ? action.payload : post)) };
+            return { ...state, posts: state.posts.data.map((post) => (post._id === action.payload._id ? action.payload : post)) };
 
         case COMMENT:
             return {
-                ...state, posts: state.posts.map((post) => {
+                ...state, posts: state.posts.data.map((post) => {
                     if (post._id === +action.payload._id) {
                         return action.payload;
                     }
@@ -40,7 +42,7 @@ const postsReducer = (state = { isLoading: true, posts: [] }, action) => {
             return { ...state, posts: [...state.posts, action.payload] };
 
         case UPDATE:
-            return { ...state, posts: state.posts.map((post) => (post._id === action.payload._id ? action.payload : post)) };
+            return { ...state, posts: state.posts.data.map((post) => (post._id === action.payload._id ? action.payload : post)) };
 
         case DELETE:
             return { ...state, posts: state.posts.filter((post) => post._id !== action.payload) };

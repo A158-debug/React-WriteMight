@@ -13,11 +13,11 @@ import useStyles from './style';
 import { likePost, deletePost ,getPost} from '../../../actions/posts';
 
 const Post = ({ post, setCurrentId }) => {
-  //It give user profile credentials and token
-  const user = JSON.parse(localStorage.getItem('profile'));
+  
+  const user = JSON.parse(localStorage.getItem('profile')); //It give user profile credentials and token
 
-  // console.log(user); //Object
-  // console.log(post); //Object
+  //console.log(user); //Object
+ //console.log(post); //Object
 
   const [likes, setLikes] = useState(post?.likes);
   const dispatch = useDispatch();
@@ -92,6 +92,7 @@ const Post = ({ post, setCurrentId }) => {
           <Typography variant="body2" color="textSecondary" component="p">{post.message.split(' ').splice(0, 20).join(' ')}...</Typography>
         </CardContent>
       </ButtonBase>
+
       <CardActions className={classes.cardActions}>
         <Button size="small" color="primary" disabled={!user?.result} onClick={handleLike}>
           <Likes />
