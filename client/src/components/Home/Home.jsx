@@ -49,7 +49,9 @@ const Home = () => {
     console.log("tags",tag)
     setTags([...tags, tag])};
 
-  const handleDeleteChip = (chipToDelete) => setTags(tags.filter((tag) => tag !== chipToDelete));
+  const handleDeleteChip = (chipToDelete) => {
+    console.log("chipToDelete",chipToDelete)
+    setTags(tags.filter((tag) => tag !== chipToDelete))};
 
   return (
     <Grow in>
