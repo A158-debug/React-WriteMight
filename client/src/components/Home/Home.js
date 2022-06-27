@@ -1,34 +1,30 @@
 import React, { useState } from 'react';
 import { Container, Grow, Grid, AppBar, TextField, Button, Paper } from '@material-ui/core';
-import ChipInput from 'material-ui-chip-input';
-
 import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
+import ChipInput from 'material-ui-chip-input';
 
 import { getPostsBySearch } from '../../actions/posts';
 import Posts from '../Posts/Posts';
 import Form from '../Form/Form';
-import Paginate from '../Pagination/Pagination';
-import useStyles from './style';
+import Pagination from '../Pagination';
+import useStyles from './styles';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
-
 const Home = () => {
-  
   const classes = useStyles();
   const query = useQuery();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  
   const page = query.get('page') || 1;
   const searchQuery = query.get('searchQuery');
 
   const [currentId, setCurrentId] = useState(0);
+  const dispatch = useDispatch();
+
   const [search, setSearch] = useState('');
   const [tags, setTags] = useState([]);
-
+  const navigate = useNavigate();
 
   const searchPost = () => {
     if (search.trim() || tags) {
@@ -45,13 +41,9 @@ const Home = () => {
     }
   };
 
-  const handleAddChip = (tag) => {
-    console.log("tags",tag)
-    setTags([...tags, tag])};
+  const handleAddChip = (tag) => setTags([...tags, tag]);
 
-  const handleDeleteChip = (chipToDelete) => {
-    console.log("chipToDelete",chipToDelete)
-    setTags(tags.filter((tag) => tag !== chipToDelete))};
+  const handleDeleteChip = (chipToDelete) => setTags(tags.filter((tag) => tag !== chipToDelete));
 
   return (
     <Grow in>
@@ -74,10 +66,9 @@ const Home = () => {
               <Button onClick={searchPost} className={classes.searchButton} variant="contained" color="primary">Search</Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
-
             {(!searchQuery && !tags.length) && (
               <Paper className={classes.pagination} elevation={6}>
-                <Paginate page={page} />
+                <Pagination page={page} />
               </Paper>
             )}
           </Grid>

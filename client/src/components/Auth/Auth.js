@@ -7,8 +7,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 import Icon from './Icon';
 import { signin, signup } from '../../actions/auth';
-import { LOGIN } from '../../constants/actionTypes';
-import useStyles from './style';
+import { AUTH } from '../../constants/actionTypes';
+import useStyles from './styles';
 import Input from './Input';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
@@ -44,7 +44,7 @@ const SignUp = () => {
     const token = res?.tokenId;
 
     try {
-      dispatch({ type: LOGIN, data: { result, token } });
+      dispatch({ type: AUTH, data: { result, token } });
 
       navigate('/');
     } catch (error) {

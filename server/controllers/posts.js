@@ -94,9 +94,9 @@ export const likePost = async(req, res)=>{
     const {id} = req.params;
     // console.log(id)
 
-    // if(!req.userId){
-    //     return res.status(401).send({ message: "Unauthenticated" })
-    // }
+    if(!req.userId){
+        return res.status(401).send({ message: "Unauthenticated" })
+    }
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`no post with id {id}`);
 
     const post = await PostMessage.findById(id);

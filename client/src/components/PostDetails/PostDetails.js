@@ -8,7 +8,7 @@ import { getPost, getPostsBySearch } from '../../actions/posts';
 import CommentSection from './CommentSection';
 import useStyles from './styles';
 
-const Post = () => {
+const PostDetails = () => {
   const { post, posts, isLoading } = useSelector((state) => state.postsReducer);
   const dispatch = useDispatch();
   const history = useNavigate();
@@ -81,7 +81,7 @@ const Post = () => {
                 <Typography gutterBottom variant="subtitle2">{name}</Typography>
                 <Typography gutterBottom variant="subtitle2">{message}</Typography>
                 <Typography gutterBottom variant="subtitle1">Likes: {likes.length}</Typography>
-                <img src={selectedFile} width="200px" alt="No file" />
+                <img src={selectedFile} width="200px" alt=""/>
               </div>
             ))}
           </div>
@@ -91,4 +91,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default PostDetails;

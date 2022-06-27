@@ -6,7 +6,7 @@ import PostDetails from './components/PostDetails/PostDetails';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
 import Auth from './components/Auth/Auth';
-import CreateOrTag from './components/CreatorOrTag/CreateOrTag';
+import CreatorTag from './components/CreatorTag/CreatorTag';
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
@@ -21,8 +21,8 @@ const App = () => {
           <Route path="/posts" element={<Home/>} />
           <Route path="/posts/search" element={<Home/>} />
           <Route path="/posts/:id" element={<PostDetails/>} />
-          <Route path="/creators/:name" element ={<CreateOrTag/>} />
-          <Route path="/tags/:name" element ={<CreateOrTag/>} />
+          <Route path="/creators/:name" element ={<CreatorTag/>} />
+          <Route path="/tags/:name" element ={<CreatorTag/>} />
           <Route path="/auth" element={!user ? <Auth /> : < Navigate to="/posts"/>} />
         </Routes>
       </Container>
