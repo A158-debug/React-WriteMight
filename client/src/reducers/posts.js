@@ -2,6 +2,8 @@ import { FETCH_ALL, FETCH_BY_SEARCH, FETCH_BY_CREATOR, FETCH_POST, CREATE, UPDAT
 
 
 const postReducer=  (state = { isLoading: true, posts: [] }, action) => {
+  // console.log(state);
+  // console.log(action.payload);
   switch (action.type) {
     case 'START_LOADING':
       return { ...state, isLoading: true };

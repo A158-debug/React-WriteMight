@@ -11,7 +11,7 @@ import useStyles from './styles';
 const PostDetails = () => {
   const { post, posts, isLoading } = useSelector((state) => state.postsReducer);
   const dispatch = useDispatch();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const classes = useStyles();
   const { id } = useParams();
 
@@ -29,7 +29,7 @@ const PostDetails = () => {
 
   if (!post) return null;
 
-  const openPost = (_id) => history.push(`/posts/${_id}`);
+  const openPost = (_id) => navigate(`/posts/${_id}`);
 
   if (isLoading) {
     return (
@@ -67,7 +67,7 @@ const PostDetails = () => {
           <Divider style={{ margin: '20px 0' }} />
         </div>
         <div className={classes.imageSection}>
-          <img className={classes.media} src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
+          <img className={classes.media} src={post.selectedFile || 'https://images.pexels.com/photos/12319913/pexels-photo-12319913.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'} alt={post.title} />
         </div>
       </div>
       {!!recommendedPosts.length && (

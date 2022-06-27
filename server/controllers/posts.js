@@ -93,15 +93,14 @@ export const likePost = async(req, res)=>{
 
     const {id} = req.params;
     // console.log(id)
-
+    // console.log("req.userId ",req.userId);
+    // console.log(req);
     if(!req.userId){
         return res.status(401).send({ message: "Unauthenticated" })
     }
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`no post with id {id}`);
 
     const post = await PostMessage.findById(id);
-    // console.log(post)
-    // console.log(req.userId)
     const index = post.likes.findIndex((id)=> id === String(req.userId));
 
     if(index === -1){
