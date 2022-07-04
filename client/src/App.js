@@ -10,7 +10,7 @@ import CreatorTag from './components/CreatorTag/CreatorTag';
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
-  console.log(user);
+  // console.log(user);
   return (
 
     <BrowserRouter>

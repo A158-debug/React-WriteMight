@@ -14,6 +14,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem('profile'));
+  // console.log(user.result.name)
   const navigate = useNavigate();
 
   const clear = () => {
@@ -29,7 +30,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if(postData.title.length===0) return;
     if (currentId === 0) {
       dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
       clear();

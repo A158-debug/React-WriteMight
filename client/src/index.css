@@ -1,8 +1,17 @@
 body {
-    background-color: #f7f8fc;
+    /* background-color: #f7f8fc; */
+    background-image: url('./images/cool-background.png');
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size:cover
 }
 
-* {
+*{
     /* font-family: 'Noto Sans JP' !important; */
     font-family: 'Heebo', sans-serif !important;
+}
+
+.MuiContainer-root {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
 }
