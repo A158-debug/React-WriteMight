@@ -18,10 +18,10 @@ const Navbar = () => {
   const classes = useStyles();
 
   const logout = () => {
+  
     dispatch({ type: actionType.LOGOUT });
 
     navigate('/auth');
-
     setUser(null);
   };
 
