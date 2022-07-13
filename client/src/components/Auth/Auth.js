@@ -1,18 +1,12 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
 // import { GoogleLogin } from 'react-google-login';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-// import {  GoogleAuthProvider,signInWithPopup} from 'firebase/auth';
-// import { authentication } from './firebase';
 // import GoogleButton from './GoogleButton'
-// import Icon from './Icon';
-// import { AUTH } from '../../constants/actionTypes';
-// import { signInWithPopup } from 'firebase/auth';
-// import firebase from './firebase'
-import {gapi} from 'gapi-script';
-import GoogleButton from './GoogleButton'
+// import {gapi} from 'gapi-script';
+
 import { signin, signup } from '../../actions/auth';
 import useStyles from './styles';
 import Input from './Input';
@@ -45,17 +39,17 @@ const SignUp = () => {
     }
   };
 
-  const clientId = '64044986296-gtvs6okkkd0vfjb0ouj9s45f5pjfmdat.apps.googleusercontent.com';
+  // const clientId = '64044986296-gtvs6okkkd0vfjb0ouj9s45f5pjfmdat.apps.googleusercontent.com';
 
-  useEffect(()=>{
-    function start(){
-      gapi.client.init({
-        clientId: clientId,
-        scope:""
-      })
-    }
-    gapi.load('client:auth2',start);
-  },[])
+  // useEffect(()=>{
+  //   function start(){
+  //     gapi.client.init({
+  //       clientId: clientId,
+  //       scope:""
+  //     })
+  //   }
+  //   gapi.load('client:auth2',start);
+  // },[])
  
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -81,7 +75,7 @@ const SignUp = () => {
           <Button type="submit" fullWidth variant="contained" color="secondary" className={classes.submit}>
             { isSignup ? 'Sign Up' : 'Sign In' }
           </Button>
-          <GoogleButton />
+          {/* <GoogleButton /> */}
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Button onClick={switchMode}>

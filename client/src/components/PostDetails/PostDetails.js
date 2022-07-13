@@ -67,7 +67,7 @@ const PostDetails = () => {
           <Divider style={{ margin: '20px 0' }} />
         </div>
         <div className={classes.imageSection}>
-          <img className={classes.media} src={post.selectedFile || 'https://images.pexels.com/photos/12319913/pexels-photo-12319913.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'} alt={post.title} />
+          <img className={classes.media} src={post.selectedFile || 'https://images.unsplash.com/photo-1520967824495-b529aeba26df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80'} alt={post.title} />
         </div>
       </div>
       {!!recommendedPosts.length && (
@@ -80,7 +80,7 @@ const PostDetails = () => {
                 <Typography gutterBottom variant="h6">{title}</Typography>
                 <Typography gutterBottom variant="subtitle2">{name}</Typography>
                 <Typography gutterBottom variant="subtitle2">{message}</Typography>
-                <Typography gutterBottom variant="subtitle1">Likes: {likes.length}</Typography>
+                <Typography gutterBottom variant="subtitle1">Likes: {likes?.length}</Typography>
                 <img src={selectedFile} width="200px" alt=""/>
               </div>
             ))}

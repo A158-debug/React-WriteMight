@@ -22,12 +22,15 @@ const Navbar = () => {
     dispatch({ type: actionType.LOGOUT });
 
     navigate('/auth');
+    console.log(user)
+    console.log("user before null ", user)
     setUser(null);
+    console.log("user after null ", user)
   };
 
   useEffect(() => {
     const token = user?.token;
-
+    // console.log(token);
     if (token) {
       const decodedToken = decode(token);
 
