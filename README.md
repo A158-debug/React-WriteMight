@@ -1,6 +1,7 @@
 # WriteMight
 
-It is a MERN stack application in which user can perform all the CRUD operations
+It is a simple social media application in which user can perform all the opeartions.
 
-User can also like, comments on other posts.
+User can also like and comments on  others posts.
+
 
